@@ -1,0 +1,1585 @@
+{
+    "swagger": "2.0",
+    "host": "localhost:8080",
+    "basePath": "/content_management_portal/",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "info": {
+        "version": "1.0.0",
+        "title": "content_management_portal_API",
+        "description": "To build Content Management Portal"
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "oauth": {
+            "tokenUrl": "http://localhost:8080/o/token",
+            "flow": "password",
+            "scopes": {
+                "read": "read users",
+                "write": "create users",
+                "update": "update users",
+                "delete": "delete users",
+                "superuser": "super user permission"
+            },
+            "type": "oauth2"
+        }
+    },
+    "definitions": {
+        "swap_hints": {
+            "type": "object",
+            "properties": {
+                "first_hint": {
+                    "type": "object",
+                    "properties": {
+                        "hint_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "hint_number": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "required": [
+                        "hint_id",
+                        "hint_number"
+                    ]
+                },
+                "second_hint": {
+                    "type": "object",
+                    "properties": {
+                        "hint_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "hint_number": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "required": [
+                        "hint_id",
+                        "hint_number"
+                    ]
+                }
+            },
+            "required": [
+                "first_hint",
+                "second_hint"
+            ]
+        },
+        "swaptestcases": {
+            "type": "object",
+            "properties": {
+                "first_testcase": {
+                    "type": "object",
+                    "properties": {
+                        "testcase_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "testcase_number": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "required": [
+                        "testcase_id",
+                        "testcase_number"
+                    ]
+                },
+                "second_testcase": {
+                    "type": "object",
+                    "properties": {
+                        "testcase_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "testcase_number": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "required": [
+                        "testcase_id",
+                        "testcase_number"
+                    ]
+                }
+            },
+            "required": [
+                "first_testcase",
+                "second_testcase"
+            ]
+        },
+        "testcase": {
+            "type": "object",
+            "properties": {
+                "testcase_details": {
+                    "type": "object",
+                    "properties": {
+                        "testcase_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "input": {
+                            "type": "string"
+                        },
+                        "output": {
+                            "type": "string"
+                        },
+                        "is_hidden": {
+                            "type": "boolean"
+                        },
+                        "score": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "order_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "required": [
+                        "input",
+                        "output",
+                        "is_hidden",
+                        "score"
+                    ]
+                }
+            }
+        },
+        "homepagequestions": {
+            "type": "object",
+            "properties": {
+                "question_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "short_title": {
+                    "type": "string"
+                },
+                "roughsolution": {
+                    "type": "boolean"
+                },
+                "testcase": {
+                    "type": "boolean"
+                },
+                "prefilledcode": {
+                    "type": "boolean"
+                },
+                "solutionapproach": {
+                    "type": "boolean"
+                },
+                "cleansolution": {
+                    "type": "boolean"
+                },
+                "hint": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "question": {
+            "type": "object",
+            "properties": {
+                "short_title": {
+                    "type": "string"
+                },
+                "problem_description": {
+                    "type": "object",
+                    "properties": {
+                        "content_type": {
+                            "type": "string",
+                            "enum": [
+                                "MARKDOWN",
+                                "HTML",
+                                "LATEX"
+                            ]
+                        },
+                        "content": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "content_type",
+                        "content"
+                    ]
+                }
+            },
+            "required": [
+                "short_title"
+            ]
+        },
+        "questionid": {
+            "type": "object",
+            "properties": {
+                "question_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "short_title": {
+                    "type": "string"
+                },
+                "problem_description": {
+                    "type": "object",
+                    "properties": {
+                        "content_type": {
+                            "type": "string",
+                            "enum": [
+                                "MARKDOWN",
+                                "HTML",
+                                "LATEX"
+                            ]
+                        },
+                        "content": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "content_type",
+                        "content"
+                    ]
+                }
+            },
+            "required": [
+                "short_title",
+                "problem_description",
+                "question_id"
+            ]
+        },
+        "RoughSolution": {
+            "type": "object",
+            "properties": {
+                "roughsolution_id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "code_type": {
+                    "type": "string",
+                    "enum": [
+                        "C",
+                        "PYTHON"
+                    ]
+                },
+                "code": {
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                }
+            }
+        },
+        "rough": {
+            "type": "object",
+            "properties": {
+                "roughsolution": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "roughsolution_id": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "code_type": {
+                                "type": "string",
+                                "enum": [
+                                    "C",
+                                    "PYTHON"
+                                ]
+                            },
+                            "code": {
+                                "type": "string"
+                            },
+                            "filename": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "code_type",
+                            "code",
+                            "filename"
+                        ]
+                    }
+                }
+            }
+        },
+        "prefilledcode": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "prefilledcode_id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "code_type": {
+                        "type": "string",
+                        "enum": [
+                            "C",
+                            "PYTHON"
+                        ]
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "code_type",
+                    "code",
+                    "filename"
+                ]
+            }
+        },
+        "cleansolution": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "cleansolution_id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "code_type": {
+                        "type": "string",
+                        "enum": [
+                            "C",
+                            "PYTHON"
+                        ]
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "code_type",
+                    "code",
+                    "filename"
+                ]
+            }
+        },
+        "hintsdefinition": {
+            "type": "object",
+            "properties": {
+                "hint_details": {
+                    "type": "object",
+                    "properties": {
+                        "hint_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "content_type": {
+                            "type": "string",
+                            "enum": [
+                                "MARKDOWN",
+                                "HTML",
+                                "LATEX"
+                            ]
+                        },
+                        "content": {
+                            "type": "string"
+                        },
+                        "order_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    "required": [
+                        "title",
+                        "content_type",
+                        "content"
+                    ]
+                }
+            }
+        },
+        "solution_approachdefinition": {
+            "type": "object",
+            "properties": {
+                "solution_approach_details": {
+                    "type": "object",
+                    "properties": {
+                        "solutionapproach_id": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "description_content_type": {
+                            "type": "string",
+                            "enum": [
+                                "MARKDOWN",
+                                "HTML",
+                                "LATEX"
+                            ]
+                        },
+                        "description_content": {
+                            "type": "string"
+                        },
+                        "complexity_analysis_content_type": {
+                            "type": "string",
+                            "enum": [
+                                "MARKDOWN",
+                                "HTML",
+                                "LATEX"
+                            ]
+                        },
+                        "complexity_analysis_content": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "title",
+                        "description_content_type",
+                        "description_content",
+                        "complexity_analysis_content_type",
+                        "complexity_analysis_content"
+                    ]
+                }
+            }
+        }
+    },
+    "parameters": {
+        "swaptestcaseorders": {
+            "name": "swap_testcase_orders",
+            "description": "swap testcase orders",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/swaptestcases"
+            }
+        },
+        "swaphintorders": {
+            "name": "swap_hint_orders",
+            "description": "swap hint orders",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/swap_hints"
+            }
+        },
+        "testcaseparameter": {
+            "name": "createtestcase",
+            "description": "testcase creation",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/testcase"
+            }
+        },
+        "hintparameter": {
+            "name": "createhint",
+            "description": "hint creation",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/hintsdefinition"
+            }
+        },
+        "solution_approachparameter": {
+            "name": "createsolution_approach",
+            "description": "solution_approach creation",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/solution_approachdefinition"
+            }
+        },
+        "LoginParameter": {
+            "name": "login",
+            "description": "Login",
+            "in": "body",
+            "required": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "username",
+                    "password"
+                ]
+            }
+        },
+        "questionparamaterize": {
+            "name": "question_id",
+            "in": "path",
+            "required": true,
+            "description": "creates question id",
+            "type": "integer"
+        },
+        "testcaseparamaterize": {
+            "name": "testcase_id",
+            "in": "path",
+            "required": true,
+            "description": "creates testcase id.",
+            "type": "integer"
+        },
+        "question": {
+            "name": "UpdateQuestion",
+            "in": "body",
+            "required": true,
+            "description": "updation of question",
+            "schema": {
+                "$ref": "#/definitions/question"
+            }
+        },
+        "questionupdate": {
+            "name": "updation",
+            "in": "body",
+            "required": true,
+            "description": "updation of question",
+            "schema": {
+                "$ref": "#/definitions/questionid"
+            }
+        },
+        "questionid": {
+            "name": "questionCreation",
+            "in": "body",
+            "required": true,
+            "description": "question creation",
+            "schema": {
+                "$ref": "#/definitions/questionid"
+            }
+        },
+        "RoughSolution": {
+            "name": "RoughSolution",
+            "in": "body",
+            "required": true,
+            "description": "rough solution creation and updation",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "roughsolutions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/RoughSolution"
+                        }
+                    }
+                }
+            }
+        },
+        "rough": {
+            "name": "roughsolution",
+            "in": "body",
+            "required": true,
+            "description": "rough solution updation and creation.",
+            "schema": {
+                "$ref": "#/definitions/rough"
+            }
+        },
+        "prefilledcodeparamater": {
+            "name": "prefilledcode",
+            "in": "body",
+            "required": true,
+            "description": "prefilledcode updation and creation.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "prefilledcode_details": {
+                        "$ref": "#/definitions/prefilledcode"
+                    }
+                }
+            }
+        },
+        "cleansolutionparamater": {
+            "name": "cleansolution",
+            "in": "body",
+            "required": true,
+            "description": "cleansolution updation and creation.",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "cleansolution_details": {
+                        "$ref": "#/definitions/cleansolution"
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "Getquestion": {
+            "description": "get question details",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "question_details": {
+                        "type": "object",
+                        "properties": {
+                            "question_id": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "short_title": {
+                                "type": "string"
+                            },
+                            "problem_description": {
+                                "type": "object",
+                                "properties": {
+                                    "content_type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "MARKDOWN",
+                                            "HTML",
+                                            "LATEX"
+                                        ]
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "content_type",
+                                    "content"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "short_title",
+                            "problem_description"
+                        ]
+                    },
+                    "roughsolutions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/RoughSolution"
+                        }
+                    },
+                    "testcases": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "testcase_id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                "input": {
+                                    "type": "string"
+                                },
+                                "output": {
+                                    "type": "string"
+                                },
+                                "is_hidden": {
+                                    "type": "boolean"
+                                },
+                                "score": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                "order_id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    },
+                    "prefilledcodes": {
+                        "$ref": "#/definitions/prefilledcode"
+                    },
+                    "solutionapproaches": {
+                        "type": "object",
+                        "properties": {
+                            "solutionapproach_id": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description_content_type": {
+                                "type": "string",
+                                "enum": [
+                                    "MARKDOWN",
+                                    "HTML",
+                                    "LATEX"
+                                ]
+                            },
+                            "description_content": {
+                                "type": "string"
+                            },
+                            "complexity_analysis_content_type": {
+                                "type": "string",
+                                "enum": [
+                                    "MARKDOWN",
+                                    "HTML",
+                                    "LATEX"
+                                ]
+                            },
+                            "complexity_analysis_content": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "title",
+                            "description_content_type",
+                            "description_content",
+                            "complexity_analysis_content_type",
+                            "complexity_analysis_content"
+                        ]
+                    },
+                    "cleansolutions": {
+                        "$ref": "#/definitions/cleansolution"
+                    },
+                    "hints": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "hint_id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "content_type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "MARKDOWN",
+                                        "HTML",
+                                        "LATEX"
+                                    ]
+                                },
+                                "content": {
+                                    "type": "string"
+                                },
+                                "order_id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            },
+                            "required": [
+                                "title",
+                                "content_type",
+                                "content"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "testcaseresponseparameter": {
+            "description": "testcase creation",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "testcase_details": {
+                        "type": "object",
+                        "properties": {
+                            "testcase_id": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "input": {
+                                "type": "string"
+                            },
+                            "output": {
+                                "type": "string"
+                            },
+                            "is_hidden": {
+                                "type": "boolean"
+                            },
+                            "score": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "order_id": {
+                                "type": "integer",
+                                "format": "int64"
+                            }
+                        },
+                        "required": [
+                            "testcase_id",
+                            "input",
+                            "output",
+                            "is_hidden",
+                            "score"
+                        ]
+                    }
+                }
+            }
+        },
+        "hintresponseparameter": {
+            "description": "created hint response",
+            "schema": {
+                "$ref": "#/definitions/hintsdefinition"
+            }
+        },
+        "solution_approachresponseparameter": {
+            "description": "created soluion_approach response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "solution_approach_details": {
+                        "type": "object",
+                        "properties": {
+                            "solutionapproach_id": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description_content_type": {
+                                "type": "string",
+                                "enum": [
+                                    "MARKDOWN",
+                                    "HTML",
+                                    "LATEX"
+                                ]
+                            },
+                            "description_content": {
+                                "type": "string"
+                            },
+                            "complexity_analysis_content_type": {
+                                "type": "string",
+                                "enum": [
+                                    "MARKDOWN",
+                                    "HTML",
+                                    "LATEX"
+                                ]
+                            },
+                            "complexity_analysis_content": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "title",
+                            "description_content_type",
+                            "description_content",
+                            "complexity_analysis_content_type",
+                            "complexity_analysis_content"
+                        ]
+                    }
+                }
+            }
+        },
+        "homepageresponse": {
+            "description": "display home page coding questions",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "total_coding_questions": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "question_details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/homepagequestions"
+                        }
+                    }
+                }
+            }
+        },
+        "RoughSolution": {
+            "description": "success response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "roughsolution_complete_details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/RoughSolution"
+                        }
+                    }
+                }
+            }
+        },
+        "prefilledcoderesponseparameter": {
+            "description": "success response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "prefilledcode_details": {
+                        "$ref": "#/definitions/prefilledcode"
+                    }
+                }
+            }
+        },
+        "cleansolutionresponseparameter": {
+            "description": "success response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "cleansolution_details": {
+                        "$ref": "#/definitions/cleansolution"
+                    }
+                }
+            }
+        },
+        "questionid": {
+            "description": "success response for question",
+            "schema": {
+                "$ref": "#/definitions/questionid"
+            }
+        },
+        "LoginResponse": {
+            "description": "Success Response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "access_token": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "access_token"
+                ]
+            }
+        },
+        "getquestionid": {
+            "description": "Success Response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "question_id": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "required": [
+                    "question_id"
+                ]
+            }
+        },
+        "roughsolutionid": {
+            "description": "Success Response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "roughsolution_id": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "required": [
+                    "roughsolution_id"
+                ]
+            }
+        },
+        "testcaseid": {
+            "description": "Success Response",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "testcase_id": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "required": [
+                    "testcase_id"
+                ]
+            }
+        },
+        "swaptestcases": {
+            "description": "testcase swapping result",
+            "schema": {
+                "$ref": "#/definitions/swaptestcases"
+            }
+        },
+        "swap_hints": {
+            "description": "hint swapping result",
+            "schema": {
+                "$ref": "#/definitions/swap_hints"
+            }
+        }
+    },
+    "paths": {
+        "/question/v1/": {
+            "post": {
+                "operationId": "question_creation",
+                "summary": "question creation",
+                "description": "create question",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                    "$ref": "#/parameters/question"
+                }],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/questionid"
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/v1/": {
+            "put": {
+                "operationId": "question_updation",
+                "summary": "update question",
+                "description": "update question",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/question"
+                    },
+                    {
+                        "$ref": "#/parameters/questionparamaterize"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/questionid"
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/delete/question/v1/": {
+            "delete": {
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "summary": "Delete question description",
+                "operationId": "question_deletion",
+                "description": "Delete question description",
+                "parameters": [{
+                    "name": "question_id",
+                    "description": "Delete question description",
+                    "in": "path",
+                    "required": true,
+                    "type": "integer",
+                    "format": "int32"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Request is OK"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/roughsolution/v1": {
+            "post": {
+                "operationId": "create_or_upadate_roughsolution",
+                "summary": "rough solution creation and updation",
+                "description": "rough solution updation and creation",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/rough"
+                    },
+                    {
+                        "$ref": "#/parameters/questionparamaterize"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/RoughSolution"
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/roughsolution/{roughsolution_id}/delete/roughsolution/v1/": {
+            "delete": {
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "summary": "Delete rough solution description",
+                "operationId": "roughsolution_deletion",
+                "description": "rough solution deletion",
+                "parameters": [{
+                        "name": "question_id",
+                        "description": "rough solution deletion",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "roughsolution_id",
+                        "description": "Delete rough solution ",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request is OK"
+                    }
+                }
+            }
+        },
+        "/homepage/codingquestions/v1": {
+            "get": {
+                "summary": "Homepage",
+                "operationId": "Homepagecodingquestions",
+                "parameters": [{
+                        "name": "offset",
+                        "in": "query",
+                        "type": "integer",
+                        "required": true,
+                        "description": "offset"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "type": "integer",
+                        "required": true,
+                        "description": "limit"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/homepageresponse"
+                    }
+                }
+            }
+        },
+        "/login/v1/": {
+            "post": {
+                "summary": "Login",
+                "operationId": "LoginUser",
+                "parameters": [{
+                    "$ref": "#/parameters/LoginParameter"
+                }],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/LoginResponse"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/testcase/v1/": {
+            "post": {
+                "operationId": "testcase_creation_and_updation",
+                "summary": "testcase creation_and_updation",
+                "description": "testcase_creation_and_updation",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/testcaseparameter"
+                    },
+                    {
+                        "$ref": "#/parameters/questionparamaterize"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/testcaseresponseparameter"
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/testcase/{testcase_id}/delete/v1/": {
+            "delete": {
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "summary": "Delete testcase",
+                "operationId": "testcase_deletion",
+                "description": "testcase deletion",
+                "parameters": [{
+                        "name": "question_id",
+                        "description": "testcase deletion",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "testcase_id",
+                        "description": "Delete testcase",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request is OK"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/hint/v1/": {
+            "post": {
+                "operationId": "hints_creation_and_updation",
+                "summary": "hints creation_and_updation",
+                "description": "hints_creation_and_updation",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/hintparameter"
+                    },
+                    {
+                        "$ref": "#/parameters/questionparamaterize"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/hintresponseparameter"
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/hint/{hint_id}/delete/v1/": {
+            "delete": {
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "summary": "Delete hints",
+                "operationId": "hints_deletion",
+                "description": "hints deletion",
+                "parameters": [{
+                        "name": "question_id",
+                        "description": "hints deletion",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "hint_id",
+                        "description": "Delete hints",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request is OK"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/solution_approach/v1/": {
+            "post": {
+                "operationId": "solution_approach_creation_and_updation",
+                "summary": "solution_approach creation_and_updation",
+                "description": "solution_approach_creation_and_updation",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/solution_approachparameter"
+                    },
+                    {
+                        "$ref": "#/parameters/questionparamaterize"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/solution_approachresponseparameter"
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/solution_approach/{solution_approach_id}/delete/v1/": {
+            "delete": {
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "summary": "Delete solution_approach",
+                "operationId": "solution_approach_deletion",
+                "description": "solution_approach deletion",
+                "parameters": [{
+                        "name": "question_id",
+                        "description": "solution_approach deletion",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "solution_approach_id",
+                        "description": "Delete solution_approach",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request is OK"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/prefilledcode/v1": {
+            "post": {
+                "operationId": "prefilledcode_creation_or_updation",
+                "summary": "prefilledcode creation and updation",
+                "description": "prefilledcode updation and creation",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/prefilledcodeparamater"
+                    },
+                    {
+                        "$ref": "#/parameters/questionparamaterize"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/prefilledcoderesponseparameter"
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/prefilledcode/{prefilledcode_id}/delete/prefilledcode/v1/": {
+            "delete": {
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "summary": "Delete prefilledcode description",
+                "operationId": "prefilledcode_deletion",
+                "description": "prefilledcode deletion",
+                "parameters": [{
+                        "name": "question_id",
+                        "description": "prefilledcode deletion",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "prefilledcode_id",
+                        "description": "Delete prefilled code ",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request is OK"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/cleansolution/v1": {
+            "post": {
+                "operationId": "cleansolution_creation_or_updation",
+                "summary": "cleansolution creation and updation",
+                "description": "cleansolution updation and creation",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/cleansolutionparamater"
+                    },
+                    {
+                        "$ref": "#/parameters/questionparamaterize"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/cleansolutionresponseparameter"
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/question/{question_id}/cleansolution/{cleansolution_id}/delete/cleansolution/v1/": {
+            "delete": {
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "summary": "Delete cleansolution description",
+                "operationId": "cleansolution_deletion",
+                "description": "cleansolution deletion",
+                "parameters": [{
+                        "name": "question_id",
+                        "description": "cleansolution deletion",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "cleansolution_id",
+                        "description": "Delete cleansolution ",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request is OK"
+                    }
+                }
+            }
+        },
+        "/get/question/{question_id}/v1/": {
+            "get": {
+                "summary": "Get Question",
+                "operationId": "get_question",
+                "description": "Get question id and return question details",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                    "$ref": "#/parameters/questionparamaterize"
+                }],
+                "responses": {
+                    "200": {
+                        "$ref": "#/responses/Getquestion"
+                    }
+                }
+            }
+        },
+        "/swap_testcase_orders/question/{question_id}/v1/": {
+            "put": {
+                "summary": "update testcase order_id",
+                "operationId": "swap_testcase_order_id",
+                "description": "update testcases orders",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/questionparamaterize"
+                    },
+                    {
+                        "$ref": "#/parameters/swaptestcaseorders"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request is Ok"
+                    }
+                }
+            }
+        },
+        "/swap_hint_orders/question/{question_id}/v1/": {
+            "put": {
+                "summary": "update hint order_id",
+                "operationId": "swap_hint_order_id",
+                "description": "update hints orders",
+                "security": [{
+                    "oauth": [
+                        "superuser"
+                    ]
+                }],
+                "parameters": [{
+                        "$ref": "#/parameters/questionparamaterize"
+                    },
+                    {
+                        "$ref": "#/parameters/swaphintorders"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request is Ok"
+                    }
+                }
+            }
+        }
+    }
+}
