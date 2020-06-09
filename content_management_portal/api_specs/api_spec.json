@@ -536,10 +536,10 @@
             "type": "integer"
         },
         "question": {
-            "name": "UpdateQuestion",
+            "name": "CreateQuestion",
             "in": "body",
             "required": true,
-            "description": "updation of question",
+            "description": "creation of question",
             "schema": {
                 "$ref": "#/definitions/question"
             }
@@ -1015,7 +1015,10 @@
                 "description": "create question",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1035,13 +1038,16 @@
             }
         },
         "/question/{question_id}/v1/": {
-            "put": {
+            "post": {
                 "operationId": "question_updation",
                 "summary": "update question",
                 "description": "update question",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1068,7 +1074,10 @@
             "delete": {
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "summary": "Delete question description",
@@ -1096,7 +1105,10 @@
                 "description": "rough solution updation and creation",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1123,7 +1135,10 @@
             "delete": {
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "summary": "Delete rough solution description",
@@ -1200,7 +1215,10 @@
                 "description": "testcase_creation_and_updation",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1227,7 +1245,10 @@
             "delete": {
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "summary": "Delete testcase",
@@ -1264,7 +1285,10 @@
                 "description": "hints_creation_and_updation",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1291,7 +1315,10 @@
             "delete": {
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "summary": "Delete hints",
@@ -1328,7 +1355,10 @@
                 "description": "solution_approach_creation_and_updation",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1355,7 +1385,10 @@
             "delete": {
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "summary": "Delete solution_approach",
@@ -1392,7 +1425,10 @@
                 "description": "prefilledcode updation and creation",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1419,7 +1455,10 @@
             "delete": {
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "summary": "Delete prefilledcode description",
@@ -1456,7 +1495,10 @@
                 "description": "cleansolution updation and creation",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1483,7 +1525,10 @@
             "delete": {
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "summary": "Delete cleansolution description",
@@ -1520,7 +1565,10 @@
                 "description": "Get question id and return question details",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1540,7 +1588,10 @@
                 "description": "update testcases orders",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{
@@ -1564,7 +1615,10 @@
                 "description": "update hints orders",
                 "security": [{
                     "oauth": [
-                        "superuser"
+                        "write",
+                        "read",
+                        "update",
+                        "delete"
                     ]
                 }],
                 "parameters": [{

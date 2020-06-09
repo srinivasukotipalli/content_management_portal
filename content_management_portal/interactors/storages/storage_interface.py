@@ -140,6 +140,11 @@ class StorageInterface:
     @abstractmethod
     def validate_solutionapproach_id(self,solutionapproach_id: int)->bool:
         pass
+    
+    @abstractmethod
+    def validate_solutionapproach_already_exists_for_question( \
+                    self, question_id: int):
+                        pass
 
     @abstractmethod
     def validate_question_solutionapproach_match(self, question_id: int, \

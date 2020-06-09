@@ -20,10 +20,7 @@ def api_wrapper(*args, **kwargs):
 
     question_id=kwargs['question_id']
 
-
     requested_data = kwargs['request_data']
-
-
 
     storage = RoughStorageImplementation()
     presenter = PresenterImplementation()

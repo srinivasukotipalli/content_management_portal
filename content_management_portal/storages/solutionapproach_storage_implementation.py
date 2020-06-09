@@ -4,7 +4,8 @@ from content_management_portal.models import SolutionApproach, Question
 from content_management_portal.exceptions import (
     InvalidSolutionApproachId,
     InvalidSolutionApproachForQuestion,
-    InvalidQuestionId
+    InvalidQuestionId,
+    SolutionApproach_already_exists_for_this_question
     )
 from content_management_portal.interactors.storages.dtos \
     import QuestionDto,SolutionApproachDto
@@ -38,18 +39,26 @@ class SolutionApproachStorageImplementation(StorageInterface):
 
             solutionapproach_obj = SolutionApproach.objects.filter( \
                     id=solutionapproach_id, question_id=question_id).first()
-                    
+
             invalid_solutionapproach = not solutionapproach_obj
             if invalid_solutionapproach:
                 raise InvalidSolutionApproachForQuestion
             else:
                 return True
 
+    def validate_solutionapproach_already_exists_for_question( \
+            self, question_id):
+                
+                solutionapproach_obj = SolutionApproach.objects.filter( \
+                                            question_id=question_id).first()
+
+                if solutionapproach_obj:
+                    raise SolutionApproach_already_exists_for_this_question
+
 
     def solutionapproach_creation(self,question_id:int, \
                             created_solutionapproach_dto:SolutionApproachDto) \
                                     ->SolutionApproachDto:
-
         created_solutionapproach_object = \
             SolutionApproach.objects.create(
                 title=created_solutionapproach_dto.title,
@@ -71,25 +80,31 @@ class SolutionApproachStorageImplementation(StorageInterface):
                             updated_solutionapproach_dto: SolutionApproachDto) \
                                     ->SolutionApproachDto:
 
-
-        solutionapproach_obj = SolutionApproach.objects.get( \
-                    id=updated_solutionapproach_dto.solutionapproach_id)
-
-        solutionapproach_obj.title = updated_solutionapproach_dto.title
-        
-        solutionapproach_obj.description_content_type = \
-                        updated_solutionapproach_dto.description_content_type
-        solutionapproach_obj.description_content = \
-                                updated_solutionapproach_dto.description_content
-        solutionapproach_obj.complexity_analysis_content_type = \
+        solutionapproach_id = updated_solutionapproach_dto.solutionapproach_id
+        title = updated_solutionapproach_dto.title
+        description_content_type = \
+                updated_solutionapproach_dto.description_content_type
+        description_content = \
+                updated_solutionapproach_dto.description_content
+        complexity_analysis_content_type = \
                 updated_solutionapproach_dto.complexity_analysis_content_type
-        solutionapproach_obj.description_content = \
+        complexity_analysis_content = \
                 updated_solutionapproach_dto.complexity_analysis_content
-        solutionapproach_obj.question_id = question_id
+        question_id = question_id
+        
+        SolutionApproach.objects.filter(id=solutionapproach_id).update( \
+            title=title,
+            description_content_type=description_content_type,
+            description_content=description_content,
+            complexity_analysis_content_type=complexity_analysis_content_type,
+            complexity_analysis_content=complexity_analysis_content,
+            question_id=question_id
+            )
+        
+        solutionapproach_obj = SolutionApproach.objects.get(id=solutionapproach_id)
 
-        solutionapproach_obj.save()
-
-        solutionapproach_dto = self._convert_solutionapproach_obj_to_dto(solutionapproach_obj)
+        solutionapproach_dto = self._convert_solutionapproach_obj_to_dto( \
+                                            solutionapproach_obj)
         return solutionapproach_dto
 
     def solutionapproach_deletion(self,question_id:int,solutionapproach_id:int):

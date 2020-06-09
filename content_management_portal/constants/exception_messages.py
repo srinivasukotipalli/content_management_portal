@@ -57,12 +57,12 @@ INVALID_HINT_FOR_QUESTION = (
     "Invalid hint for question, try with valid hint for appropriate question",
     "INVALID_HINT_FOR_QUESTION"
     )
-    
+
 INVALID_PREFILLED_CODE = (
     "Invalid prefilledcode id, try with valid prefilledcode id",
     "INVALID_PREFILLED_CODE"
     )
-    
+
 INVALID_PREFILLED_CODE_FOR_QUESTION = (
     "Invalid prefilledcode for question, try with valid prefilledcode for appropriate question",
     "INVALID_PREFILLED_CODE_FOR_QUESTION"
@@ -72,7 +72,7 @@ INVALID_CLEANSOLUTION = (
     "Invalid cleansolution id, try with valid cleansolution id",
     "INVALID_CLEANSOLUTION"
     )
-    
+
 INVALID_CLEAN_SOLUTION_FOR_QUESTION = (
     "Invalid cleansolution for question, try with valid cleansolution for appropriate question",
     "INVALID_CLEAN_SOLUTION_FOR_QUESTION"
@@ -82,8 +82,13 @@ INVALID_SOLUTIONAPPROACH_ID = (
     "Invalid solutionapproach id, try with valid solutionapproach id",
     "INVALID_SOLUTIONAPPROACH_ID"
     )
-    
+
 INVALID_SOLUTIONAPPROACH_FOR_QUESTION = (
     "Invalid solutionapproach for question, try with valid solutionapproach \
             for appropriate question","INVALID_SOLUTIONAPPROACH_FOR_QUESTION"
+    )
+
+SOLUTIONAPPROACH_ALREADY_EXISTS_FOR_THIS_QUESTION = (
+    "solutionapproach already exists for this question",
+    "SOLUTIONAPPROACH_ALREADY_EXISTS_FOR_THIS_QUESTION"
     )

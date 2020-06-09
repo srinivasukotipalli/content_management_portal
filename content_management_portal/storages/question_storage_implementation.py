@@ -7,9 +7,15 @@ from content_management_portal.constants.enums import (
 from content_management_portal.models import Question
 from content_management_portal.interactors.storages.storage_interface import \
     StorageInterface
-
+from content_management_portal.exceptions.exceptions import InvalidQuestionId
 
 class QuestionStorageImplementation(StorageInterface):
+
+    def validate_question_id(self,question_id: int):
+        try:
+            Question.objects.get(id=question_id)
+        except Question.DoesNotExist:
+            raise InvalidQuestionId
 
     def question_creation(self, \
                     user_id: int,

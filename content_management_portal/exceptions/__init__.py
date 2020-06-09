@@ -17,11 +17,12 @@ from .exceptions import (
 	InvalidSolutionApproachForQuestion,
 	InvalidSolutionApproachId,
 	InvalidOrderId,
+	SolutionApproach_already_exists_for_this_question
 	)
 
 __all__=[
 			'InvalidUserName',
-			'InvalidPassword', 
+			'InvalidPassword',
 			'InvalidRoughSolutionId',
 			'InvalidQuestionId',
 			'InvalidTestCaseId',
@@ -37,5 +38,6 @@ __all__=[
 			'InvalidHintId',
 			'InvalidSolutionApproachForQuestion',
 			'InvalidSolutionApproachId',
-			'InvalidOrderId'
+			'InvalidOrderId',
+			'SolutionApproach_already_exists_for_this_question'
 		]

@@ -20,7 +20,7 @@ def api_wrapper(*args, **kwargs):
     
     question_id = kwargs['question_id']
     
-    #print(kwargs)
+    print(type(question_id))
     user = kwargs['user']
     
     user_id = user.id

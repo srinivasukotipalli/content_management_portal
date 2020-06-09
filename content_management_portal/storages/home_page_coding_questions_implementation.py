@@ -3,7 +3,8 @@ from content_management_portal.interactors.storages.dtos \
 from content_management_portal.models import Question
 from content_management_portal.interactors.storages.storage_interface import \
     StorageInterface
-from content_management_portal.interactors.storages.dtos import QuestionDetailsDto
+from content_management_portal.interactors.storages.dtos \
+    import QuestionDetailsDto
 
 
 class HomeStorageImplementation(StorageInterface):
@@ -33,7 +34,7 @@ class HomeStorageImplementation(StorageInterface):
                     solutionapproach = self._check_solutionapproach_obj(question),
                     cleansolution = question.clean_solutions.all().exists(),
                     hint = question.hints.all().exists()
-                    ) \
+                    )
                     for question in question_query_set[offset:offset+limit]
             ]
 

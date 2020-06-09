@@ -11,22 +11,21 @@ from content_management_portal.storages.home_page_coding_questions_implementatio
 	import HomeStorageImplementation
 from content_management_portal.presenters.coding_questions_presenter_implementation \
 			import PresenterImplementation
-	
+
 @validate_decorator(validator_class=ValidatorClass)
 def api_wrapper(*args, **kwargs):
 
 	requested_data = kwargs['request_query_params']
-	
+
 	offset = requested_data['offset']
 	limit = requested_data['limit']
-	
+
 	storage = HomeStorageImplementation()
 	presenter = PresenterImplementation()
-	
+
 	interactor = CodingQuestionsInteractor(storage=storage,presenter=presenter)
-	
+
 	response = interactor.homepage_coding_questions(offset=offset, limit=limit)
-	
+
 	json_data = json.dumps(response)
-	print(json_data)
 	return HttpResponse(json_data, status=201)

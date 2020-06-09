@@ -54,3 +54,6 @@ class InvalidSolutionApproachForQuestion(Exception):
 
 class InvalidOrderId(Exception):
     pass
+
+class SolutionApproach_already_exists_for_this_question(Exception):
+    pass

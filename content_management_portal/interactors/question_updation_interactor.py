@@ -3,6 +3,8 @@ from content_management_portal.interactors.storages.storage_interface \
     import StorageInterface
 from content_management_portal.interactors. \
     presenters.question_presenter_interface import PresenterInterface
+from content_management_portal.exceptions.exceptions import InvalidQuestionId
+
 
 class QuestionUpdateInteractor:
 
@@ -14,6 +16,11 @@ class QuestionUpdateInteractor:
     def question_updation(self,user_id: int, short_title: str, \
                 content_type:TextType, content:str, question_id:int):
         
+        try:
+            self.storage.validate_question_id(question_id=question_id)
+        except InvalidQuestionId:
+            self.presenter.raise_invalid_question_exception()
+
         questiondto = self.storage.question_updation(
                                                         user_id=user_id,
                                                         short_title=short_title,

@@ -4,9 +4,10 @@ from content_management_portal.constants.exception_messages \
     import (
             INVALID_QUESTION_ID,
             INVALID_SOLUTIONAPPROACH_ID,
-            INVALID_SOLUTIONAPPROACH_FOR_QUESTION
+            INVALID_SOLUTIONAPPROACH_FOR_QUESTION,
+            SOLUTIONAPPROACH_ALREADY_EXISTS_FOR_THIS_QUESTION
             )
-from django_swagger_utils.drf_server.exceptions import NotFound
+from django_swagger_utils.drf_server.exceptions import NotFound, BadRequest
 from typing import List
 from content_management_portal.interactors.storages.dtos \
     import SolutionApproachDto
@@ -21,6 +22,9 @@ class PresenterImplementation(PresenterInterface):
 
     def raise_invalid_solutionapproach_for_question_exception(self):
         raise NotFound(*INVALID_SOLUTIONAPPROACH_FOR_QUESTION)
+
+    def validate_solutionapproach_already_exists_for_question(self):
+        raise BadRequest(*SOLUTIONAPPROACH_ALREADY_EXISTS_FOR_THIS_QUESTION)
 
     def get_response_for_solutionapproach(self, \
                             solutionapproach_dto: SolutionApproachDto):

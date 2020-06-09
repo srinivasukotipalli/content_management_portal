@@ -6,7 +6,8 @@ from content_management_portal.constants.enums import TextType
 from content_management_portal.exceptions import (
     InvalidQuestionId,
     InvalidSolutionApproachId,
-    InvalidSolutionApproachForQuestion
+    InvalidSolutionApproachForQuestion,
+    SolutionApproach_already_exists_for_this_question
     )
 from typing import Optional, List, Dict
 from content_management_portal.interactors.storages.dtos \
@@ -28,8 +29,9 @@ class SolutionapproachCreateOrUpdateInteractor:
         except InvalidQuestionId:
             self.presenter.raise_invalid_question_exception()
 
-        solutionapproach_id = solutionapproach_details.get('solutionapproach_id')
 
+        solutionapproach_id = solutionapproach_details.get('solutionapproach_id')
+        #print(solutionapproach_id)
         if solutionapproach_id:
 
             try:
@@ -59,13 +61,22 @@ class SolutionapproachCreateOrUpdateInteractor:
                         question_id=question_id,
                         solutionapproach_id=solutionapproach_id
                         )
-
+            
+            
+            #print("A"*1000, solutionapproach_id)
             solutionapproach_dto = self.storage.solutionapproach_updation( \
                         question_id=question_id,
                         updated_solutionapproach_dto=updated_solutionapproach_dto,
                         )
 
         else:
+            #print("b"*1000, solutionapproach_id)
+            try:
+                self.storage.validate_solutionapproach_already_exists_for_question( \
+                    question_id=question_id)
+            except SolutionApproach_already_exists_for_this_question:
+                self.presenter.validate_solutionapproach_already_exists_for_question()
+                
             created_solutionapproach_dto = \
                     SolutionApproachDto(
                         title=solutionapproach_details["title"],

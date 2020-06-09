@@ -17,6 +17,10 @@ class PresenterInterface(ABC):
     @abstractmethod
     def raise_invalid_solutionapproach_for_question_exception(self):
         pass
+    
+    @abstractmethod
+    def validate_solutionapproach_already_exists_for_question(self):
+        pass
 
     @abstractmethod
     def get_response_for_solutionapproach(self, \
